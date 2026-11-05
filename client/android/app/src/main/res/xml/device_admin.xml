@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Políticas que declara Cauce Stream como administrador de dispositivo.
+     goToSleep() no necesita un tag propio: como Device Owner la app tiene
+     todos los poderes sobre el dispositivo. force-lock se declara porque
+     lockNow() es la política asociada al control de energía de pantalla. -->
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-policies>
+        <force-lock />
+    </uses-policies>
+</device-admin>

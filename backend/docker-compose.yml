@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: cauce
+      POSTGRES_PASSWORD: cauce
+      POSTGRES_DB: cauce
+    ports:
+      # Expuesto en la red local para inspeccionar la BD desde la PC.
+      # Si no se necesita, restringir a "127.0.0.1:5432:5432".
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cauce -d cauce"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+asyncpg://cauce:cauce@db:5432/cauce
+      APP_ENV: development
+      DEBUG: "true"
+      # Media binaries (RF-008) live inside the container; the volume
+      # keeps them across container recreation.
+      CAUCE_MEDIA_DIR: /app/data/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - media_data:/app/data/media
+    # Runs pending Alembic migrations (a no-op while there are none)
+    # and then starts the API server.
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000"
+
+volumes:
+  postgres_data:
+  media_data:

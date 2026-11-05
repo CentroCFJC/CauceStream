@@ -1,0 +1,32 @@
+// .stignore del folder "cauce-stream" (raiz: D:\CauceStream).
+// Syncthing SOLO lee este archivo desde la raiz de la carpeta compartida.
+// El proyecto CauceStream vive exclusivamente aqui; D:\Maker-sync no
+// se usa para nada del proyecto.
+
+// Entornos virtuales: contienen rutas absolutas y deben recrearse en cada equipo
+(?d)**/.venv
+(?d)**/.venv-test
+(?d)**/venv
+(?d)**/cauce_venv
+
+// Caches de Python y herramientas
+(?d)**/__pycache__
+(?d)**/*.pyc
+(?d)**/.pytest_cache
+(?d)**/.mypy_cache
+(?d)**/.ruff_cache
+
+// Secretos: el .env real vive solo en el servidor
+(?d)**/.env
+
+// Volumen local de PostgreSQL
+(?d)**/postgres_data
+
+// Builds y caches de Flutter/Gradle: gigas con rutas absolutas del
+// equipo local; cada equipo los regenera dentro del proyecto
+(?d)**/build
+(?d)**/.dart_tool
+(?d)**/.gradle
+(?d)**/.kotlin
+(?d)**/ephemeral
+(?d)**/.flutter-plugins-dependencies

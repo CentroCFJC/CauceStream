@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="es" class="h-full" style=""><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content">
+  <title>Acceso — CAUCE Circuito Interactivo</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet" class="">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cauce: {
+              orange: '#ea580c',
+              orangeDark: '#c2410c',
+              brown: '#6d432d',
+              maroon: '#600a0a',
+              yellow: '#f2c744',
+              teal: '#2b8190',
+              tealDark: '#1d5a65',
+              cream: '#faf6db',
+              creamLight: '#fffdf4',
+              surface: '#fff8f6',
+              surfaceDim: '#efd4cb'
+            }
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            ui: ['"Space Grotesk"', 'sans-serif'],
+            body: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          borderRadius: {
+            '2xl': '24px',
+            '3xl': '32px',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Prevent rubber banding & manage virtual keyboard scrolling smoothly */
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #faf6db;
+      color: #17404a;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    /* Hide input number arrows */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+    .pin-input:focus {
+      border-color: #ea580c;
+      box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-[#faf6db] text-[#17404a] flex flex-col justify-between min-h-[100dvh] relative selection:bg-orange-200">
+
+  <!-- Fondo orgánico característico de CAUCE -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+    <!-- Onda fluida superior derecha -->
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMf_a8STBnJh2uqSu-oahSHlnUtXBJmealEN0XwoZLgmx-ZZK4gGZ-0NLoxnJhiDbyl5131gn0OOwb3bo6eysSVxpyqi7dT58dFlDTHvOkqtB32d6VYgd_kgzcK1U5lzVKEZVQXf_3aRoOD9Q2QunO_nskNgxHz4OcqSu26v9nhOD50KfEeL-wdBUCifM6B7VdeE_27c8xHIWfEV6aV77ocANWZ59gqOsi1f75-RvOmW-bQVSTH9hPs34-EPXUh9zB5Fo" alt="" class="absolute -top-12 -right-16 w-52 h-52 opacity-20 object-contain rotate-12">
+    <!-- Onda fluida decorativa inferior izquierda -->
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkymmq5nyjcmNaiSQDps21gNXMit-80ClM_36VmU6uXiZbmz6iwlrdkg_sdORmwdZcP_as6HsS7k55_s4kZNLMfoOMAu-9PQ7t74apiFP5-EjyXx3FnoGIlN5vWo-R12IldMw6sOQ9CQziMZpSNxdfZ7_DE1_KMtIaO_b9U9ClzURGtrQ0gO21cCctV3rf9VbqfEXf_Q3OutdVmMV8OtshELIash5YXntv2gOOPS8N3z_T3B6dHt1VkyDXmQN3u8ZrXIE" alt="" class="absolute bottom-10 -left-16 w-60 h-60 opacity-15 object-contain -rotate-45">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-[#f2c744]/10 rounded-full blur-3xl pointer-events-none"></div>
+  </div>
+
+  <!-- Contenedor scrollable que se comprime sin tapar el contenido con el teclado virtual -->
+  <div class="relative z-10 flex-1 flex flex-col justify-between w-full max-w-md mx-auto p-5 sm:p-6 overflow-y-auto">
+
+    <!-- Encabezado / Branding & Contexto de Sala -->
+    <header class="pt-2 pb-4 flex flex-col items-center text-center">
+      <!-- Badge de Estado Local LAN -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/70 backdrop-blur-md border border-[#6d432d]/10 text-xs font-semibold text-[#17404a] mb-5 shadow-xs"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="">LAN ACTIVA</span>
+        <span class="text-stone-300">|</span>
+        <span class="text-xs text-stone-500 font-mono">10.15.1.0/24</span></div>
+
+      <!-- Logotipo oficial de CAUCE -->
+      <div class="w-48 h-auto mb-3 flex items-center justify-center">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkQ-kJ2ckFr7ighGUEfbtu6uliKzfOZj1sREyYCbESI_qgmnHIc3TNPPj9cQYFGTBwB6gJIqIvI_JY0xA9pbw34dTIbh2Pc9dTom2flRKHPhuL25Ryo_oUPX9hYA6FcvEs5XDReSbPloVtW-7zPNxJeYGNUqXZjDh_Os-COvgbS5kw5mSrNXwx-gKh15iaTVQNgV0x2v8ISufVir12TUziFhVFXHb2PnLToY7zWtmvTXSLRc9MI8SfiZnhvbLgOt6SRGE" alt="CAUCE Circuito Interactivo" class="w-full object-contain drop-shadow-xs">
+      </div>
+
+      <!-- Título de Sistema Interno con lema estilizado -->
+      <h1 class="text-2xl leading-tight text-[#17404a] mt-1" style="font-family: &quot;Space Grotesk&quot;, sans-serif; letter-spacing: -0.02em;">CAUCE_<span class="text-[#ea580c]">STREAM</span></h1>
+      <p class="text-xs font-medium text-[#6d432d]/80 mt-1 max-w-[280px]">
+        Plataforma interna para mediadores y operadores de sala
+      </p>
+    </header>
+
+    <!-- Tarjeta Principal del Formulario de Acceso -->
+    <main class="w-full bg-[#fffdf4] rounded-[28px] p-6 shadow-sm border border-[#6d432d]/10 backdrop-blur-xs my-auto">
+      <div class="mb-5"><h2 class="text-lg font-bold text-[#17404a] font-brand tracking-tight text-center" style="font-family: &quot;Space Grotesk&quot;, sans-serif;">Iniciar Sesión</h2></div>
+
+      <form id="loginForm" class="space-y-4" onsubmit="event.preventDefault(); handleSubmit();">
+        
+        <!-- Campo: Email -->
+        <div>
+          <label for="email" class="block text-xs font-bold text-[#17404a] mb-1.5 uppercase tracking-wide flex items-center justify-between" style="font-family: &quot;Plus Jakarta Sans&quot;, sans-serif;">
+            <span class="">Correo institucional</span>
+            
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#2b8190]">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"></path>
+              </svg>
+            </div>
+            <input type="email" id="email" name="email" required="" autocomplete="email" value="mediador@cauce.edu" placeholder="tu.usuario@cauce.edu" class="w-full pl-10 pr-4 py-3 bg-[#faf6db]/60 border border-[#6d432d]/20 rounded-2xl text-sm font-medium text-[#17404a] placeholder-stone-400 focus:outline-none focus:border-[#ea580c] focus:bg-white focus:ring-2 focus:ring-[#ea580c]/20 transition-all duration-150">
+          </div>
+        <div class="mt-2 flex items-center"><label class="relative flex items-center gap-2 cursor-pointer select-none"><input type="checkbox" id="remember" name="remember" checked="" class="peer sr-only"><div class="w-4 h-4 rounded border border-[#6d432d]/30 bg-[#faf6db] peer-checked:bg-[#ea580c] peer-checked:border-[#ea580c] flex items-center justify-center transition-colors"><svg class="w-3 h-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity stroke-[3]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg></div><span class="text-xs font-semibold text-[#17404a]">Recordar mi correo</span></label></div></div>
+
+        <!-- Campo: PIN Numérico de 4 Dígitos -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="block text-xs font-bold text-[#17404a] uppercase tracking-wide" style="font-family: &quot;Plus Jakarta Sans&quot;, sans-serif;">
+              PIN de Acceso <span class="text-[#ea580c]">*</span>
+            </label>
+            <span class="text-[10px] font-semibold text-[#2b8190] bg-[#2b8190]/10 px-2 py-0.5 rounded-md">
+              4 dígitos numéricos
+            </span>
+          </div>
+
+          <!-- Casillas de 4 dígitos integradas para teclado numérico instantáneo -->
+          <div class="grid grid-cols-4 gap-2.5">
+            <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" id="pin-1" required="" class="pin-input h-14 text-center text-xl font-bold bg-[#faf6db]/60 border border-[#6d432d]/20 rounded-2xl text-[#17404a] focus:bg-white focus:outline-none transition-all shadow-xs" oninput="handlePinInput(this, 'pin-2')" onkeydown="handleBackspace(event, this, null)" autocomplete="one-time-code">
+            <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" id="pin-2" required="" class="pin-input h-14 text-center text-xl font-bold bg-[#faf6db]/60 border border-[#6d432d]/20 rounded-2xl text-[#17404a] focus:bg-white focus:outline-none transition-all shadow-xs" oninput="handlePinInput(this, 'pin-3')" onkeydown="handleBackspace(event, this, 'pin-1')">
+            <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" id="pin-3" required="" class="pin-input h-14 text-center text-xl font-bold bg-[#faf6db]/60 border border-[#6d432d]/20 rounded-2xl text-[#17404a] focus:bg-white focus:outline-none transition-all shadow-xs" oninput="handlePinInput(this, 'pin-4')" onkeydown="handleBackspace(event, this, 'pin-2')">
+            <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" id="pin-4" required="" class="pin-input h-14 text-center text-xl font-bold bg-[#faf6db]/60 border border-[#6d432d]/20 rounded-2xl text-[#17404a] focus:bg-white focus:outline-none transition-all shadow-xs" oninput="handlePinLast(this)" onkeydown="handleBackspace(event, this, 'pin-3')">
+          </div>
+          <div class="flex items-center justify-between mt-1.5 px-1">
+            
+            
+          </div>
+        </div>
+
+        <!-- Opción Remember Me (Recordar correo) -->
+        
+
+        <!-- Botón de Envío / Ingresar a la Sala -->
+        <div class="pt-2">
+          <button type="submit" id="submitBtn" class="w-full py-4 px-6 rounded-full bg-[#ea580c] hover:bg-[#c2410c] active:scale-[0.98] text-white text-base tracking-wide flex items-center justify-center gap-2 shadow-md shadow-orange-500/25 transition-all duration-150 cursor-pointer" style="font-family: &quot;Plus Jakarta Sans&quot;, sans-serif;"><span class="">Ingresar al Circuito</span></button>
+        <div class="text-center mt-3"><a href="#" class="text-xs font-medium text-[#2b8190] hover:underline" onclick="alert('Solicita un reinicio de PIN con el Administrador Técnico de Sala.')">¿Olvidaste tu PIN?</a></div></div>
+
+      </form>
+
+      <!-- Mensaje de estado / feedback instantáneo -->
+      <div id="loginFeedback" class="hidden mt-3 p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs text-center font-medium"></div>
+
+      <!-- Quick Switcher de Roles (para prototipo / agilidad operativa) -->
+      <div class="mt-4 pt-3 border-t border-[#6d432d]/10 flex items-center justify-between text-[11px] text-[#6d432d]/70">
+        <span class="">Rápido:</span>
+        <button type="button" onclick="setRole('mediador')" class="px-2 py-0.5 rounded-md bg-[#faf6db] hover:bg-stone-200 font-medium text-[#17404a]" style="font-family: &quot;Plus Jakarta Sans&quot;, sans-serif;">
+          Mediador
+        </button>
+        <button type="button" onclick="setRole('admin')" class="px-2 py-0.5 rounded-md bg-[#faf6db] hover:bg-stone-200 font-medium text-[#17404a]" style="font-family: &quot;Plus Jakarta Sans&quot;, sans-serif;">
+          Admin Técnico
+        </button>
+      </div>
+
+    </main>
+
+    <!-- Pie / Indicador de seguridad y servidor local -->
+    <footer class="pt-4 pb-2 text-center text-xs text-[#6d432d]/70 flex flex-col items-center gap-1">
+      <div class="inline-flex items-center gap-1.5 text-[11px]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+        </svg>
+        <span class="">Autenticación local aislada en nodo servidor CAUCE</span>
+      </div>
+      <span class="text-[10px] text-stone-400">Versión v2.4.1 · Nodo Central #04</span>
+    </footer>
+
+  </div>
+
+  <script>
+    // Manejo de foco automático en los 4 dígitos de PIN
+    function handlePinInput(current, nextId) {
+      current.value = current.value.replace(/[^0-9]/g, '');
+      if (current.value.length >= 1 && nextId) {
+        const nextElem = document.getElementById(nextId);
+        if (nextElem) nextElem.focus();
+      }
+    }
+
+    function handlePinLast(current) {
+      current.value = current.value.replace(/[^0-9]/g, '');
+      if (current.value.length >= 1) {
+        // PIN completado, auto-validar si email presente
+        const email = document.getElementById('email').value;
+        if (email) {
+          // Opcional feedback suave
+        }
+      }
+    }
+
+    function handleBackspace(e, current, prevId) {
+      if (e.key === 'Backspace' && !current.value && prevId) {
+        const prevElem = document.getElementById(prevId);
+        if (prevElem) {
+          prevElem.focus();
+          prevElem.value = '';
+        }
+      }
+    }
+
+    // Toggle de visibilidad de PIN
+    let pinVisible = false;
+    function togglePinVisibility() {
+      pinVisible = !pinVisible;
+      const type = pinVisible ? 'text' : 'password';
+      ['pin-1', 'pin-2', 'pin-3', 'pin-4'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.type = type;
+      });
+      document.getElementById('togglePinBtn').textContent = pinVisible ? 'Ocultar PIN' : 'Mostrar PIN';
+    }
+
+    // Rápido switch para pruebas
+    function setRole(role) {
+      const emailInput = document.getElementById('email');
+      const p1 = document.getElementById('pin-1');
+      const p2 = document.getElementById('pin-2');
+      const p3 = document.getElementById('pin-3');
+      const p4 = document.getElementById('pin-4');
+      if (role === 'mediador') {
+        emailInput.value = 'mediador.sala01@cauce.edu';
+        p1.value = '1'; p2.value = '2'; p3.value = '3'; p4.value = '4';
+      } else {
+        emailInput.value = 'admin.tecnico@cauce.edu';
+        p1.value = '9'; p2.value = '8'; p3.value = '7'; p4.value = '0';
+      }
+    }
+
+    function handleSubmit() {
+      const p1 = document.getElementById('pin-1').value;
+      const p2 = document.getElementById('pin-2').value;
+      const p3 = document.getElementById('pin-3').value;
+      const p4 = document.getElementById('pin-4').value;
+      const pin = p1 + p2 + p3 + p4;
+      const feedback = document.getElementById('loginFeedback');
+      
+      if (pin.length < 4) {
+        feedback.className = "mt-3 p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs text-center font-medium block";
+        feedback.textContent = "Por favor ingresa los 4 dígitos completos de tu PIN.";
+        return;
+      }
+
+      feedback.className = "mt-3 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs text-center font-medium block";
+      feedback.textContent = "Conectando al servidor local de sala...";
+      
+      const btn = document.getElementById('submitBtn');
+      btn.innerHTML = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> <span>Accediendo...</span>`;
+      btn.disabled = true;
+    }
+  </script>
+
+
+
+
+
+
+
+
+</body></html>

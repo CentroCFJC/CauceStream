@@ -1,0 +1,11 @@
+# Syncthing: la marca interna del folder (folder ID) no se versiona.
+# El .stignore SI se versiona a proposito: es la configuracion del
+# folder compartida entre dispositivos (ver backend/README.md).
+.stfolder/
+
+# IDEs
+.vscode/
+
+# Artefacto accidental de redirecciones de Windows hechas en Git Bash
+# (p. ej. `comando > nul` crea un archivo llamado "nul").
+nul

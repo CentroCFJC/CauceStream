@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  CauceStream opera unicamente dentro de la LAN de la Sala Cauce
+  (10.15.0.0/16) y el backend FastAPI sirve HTTP sin TLS desde el nodo
+  central. Como Android no admite rangos CIDR en <domain>, se permite
+  el trafico en claro de forma general: la aplicacion no consume
+  servicios externos y solo se usa dentro de la red de la sala.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true"/>
+</network-security-config>

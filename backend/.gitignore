@@ -1,0 +1,29 @@
+# Environment / secrets
+.env
+
+# Virtual environments
+.venv*/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Build / distribution
+build/
+dist/
+
+# IDEs
+.idea/
+.vscode/
+
+# Local databases / docker volumes
+postgres_data/
+
+# Binarios de medios subidos en runtime (los guarda el servidor local)
+data/media/
